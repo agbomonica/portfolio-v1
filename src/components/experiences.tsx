@@ -2,7 +2,8 @@
 import { motion } from 'motion/react';
 
 import { Tabs, TabsList, TabsTrigger, TabsContent, HeadingH3 } from './common';
-import { srSectionVariants } from '@/utils';
+import { Experience } from './experience';
+import { srSectionVariants, experiences } from '@/utils';
 
 const Experiences = () => {
   return (
@@ -11,9 +12,9 @@ const Experiences = () => {
       initial="hidden"
       whileInView="visible"
       variants={srSectionVariants}
-      className="pb-24"
+      className="py-24"
     >
-      <HeadingH3 className="mb-12 text-foreground">
+      <HeadingH3 className="mb-8 text-foreground md:mb-12">
         Where I&apos;ve <span className="text-secondary">worked</span>
       </HeadingH3>
 
@@ -25,10 +26,21 @@ const Experiences = () => {
           <TabsTrigger value="naky">Naky Integrated Solutions</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="four-core">Four core</TabsContent>
-        <TabsContent value="bit-piler">Bitpiler</TabsContent>
-        <TabsContent value="mfedoo">Mfedoo</TabsContent>
-        <TabsContent value="naky">Naky</TabsContent>
+        <TabsContent value="four-core">
+          <Experience experience={experiences['four-core']} />
+        </TabsContent>
+
+        <TabsContent value="bit-piler">
+          <Experience experience={experiences['bit-piler']} />
+        </TabsContent>
+
+        <TabsContent value="mfedoo">
+          <Experience experience={experiences['mfedoo']} />
+        </TabsContent>
+
+        <TabsContent value="naky">
+          <Experience experience={experiences['naky']} />
+        </TabsContent>
       </Tabs>
     </motion.section>
   );

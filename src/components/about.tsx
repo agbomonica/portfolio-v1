@@ -13,14 +13,14 @@ const About = () => {
       initial="hidden"
       whileInView="visible"
       variants={srSectionVariants}
-      className="pb-24"
+      className="pb-24 pt-12"
     >
-      <HeadingH3 className="mb-12 text-foreground">
+      <HeadingH3 className="mb-8 text-foreground md:mb-12">
         A little about <span className="text-secondary">me</span>
       </HeadingH3>
 
-      <div className="flex items-start gap-24">
-        <div className="group relative flex size-64 rounded-md bg-secondary-1 shadow-lg transition-all duration-100 before:absolute before:left-0 before:top-0 before:block before:size-full before:rounded-md before:bg-primary before:mix-blend-screen after:absolute after:left-4 after:top-4 after:-z-[1] after:block after:size-full after:rounded-md after:border-2 after:border-secondary">
+      <div className="flex flex-col-reverse items-start gap-16 lg:flex-row lg:gap-24">
+        <div className="group relative flex size-56 rounded-md bg-secondary-1 shadow-lg transition-all duration-100 before:absolute before:left-0 before:top-0 before:block before:size-full before:rounded-md before:bg-primary before:mix-blend-screen after:absolute after:left-4 after:top-4 after:-z-[1] after:block after:size-full after:rounded-md after:border-2 after:border-secondary md:size-64">
           <Image
             src={imgSrc}
             alt="Monica Agbo's head shot"
@@ -53,10 +53,10 @@ const About = () => {
           <HeadingSmall>
             Here are a few technologies I&apos;ve been recently working with:
           </HeadingSmall>
-          <div className="mt-4 grid grid-cols-3 gap-2">
+          <div className="xs:grid-cols-3 mt-4 grid grid-cols-2 gap-2">
             {technologies.map(({ name, icon: Icon }) => (
               <div key={name} className="flex items-center gap-2">
-                <Icon className="text-2xl text-secondary" />
+                <Icon className="text-xl text-secondary sm:text-2xl" />
                 <span>{name}</span>
               </div>
             ))}

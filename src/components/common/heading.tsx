@@ -7,7 +7,7 @@ const HeadingH1 = ({ children, className, ...props }: HeadingProps) => {
   return (
     <h1
       className={cn(
-        'scroll-m-20 text-6xl font-extrabold tracking-tight lg:text-8xl',
+        'scroll-m-20 text-balance text-4xl font-extrabold tracking-tight md:text-6xl lg:text-8xl',
         className
       )}
       {...props}
@@ -19,29 +19,43 @@ const HeadingH1 = ({ children, className, ...props }: HeadingProps) => {
 
 const HeadingH2 = ({ children, className, ...props }: HeadingProps) => {
   return (
-    <h1
+    <h2
       className={cn(
-        'scroll-m-20 pb-2 text-5xl font-semibold tracking-tight first:mt-0 lg:text-6xl',
+        'scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0 md:text-5xl lg:text-6xl',
         className
       )}
       {...props}
     >
       {children}
-    </h1>
+    </h2>
   );
 };
 
 const HeadingH3 = ({ children, className, ...props }: HeadingProps) => {
   return (
-    <h1
+    <h3
       className={cn(
-        'scroll-m-20 text-4xl font-semibold tracking-tight first:mt-0 lg:text-5xl',
+        'scroll-m-20 text-2xl font-semibold tracking-tight md:text-4xl lg:text-5xl',
         className
       )}
       {...props}
     >
       {children}
-    </h1>
+    </h3>
+  );
+};
+
+const HeadingH4 = ({ children, className, ...props }: HeadingProps) => {
+  return (
+    <h4
+      className={cn(
+        'scroll-m-20 text-base font-semibold tracking-tight',
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </h4>
   );
 };
 
@@ -56,6 +70,7 @@ const HeadingP = ({
     </p>
   );
 };
+
 const HeadingSmall = ({
   children,
   className,
@@ -71,4 +86,4 @@ const HeadingSmall = ({
   );
 };
 
-export { HeadingH1, HeadingH2, HeadingH3, HeadingP, HeadingSmall };
+export { HeadingH1, HeadingH2, HeadingH3, HeadingH4, HeadingP, HeadingSmall };

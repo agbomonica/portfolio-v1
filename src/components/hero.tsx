@@ -9,7 +9,7 @@ import {
   HeadingSmall,
   Socials,
 } from './common';
-import { srSectionVariants } from '@/utils';
+import { email, srSectionVariants } from '@/utils';
 
 const Hero = () => {
   return (
@@ -17,7 +17,7 @@ const Hero = () => {
       initial="hidden"
       whileInView="visible"
       variants={srSectionVariants}
-      className="flex h-screen min-h-screen flex-col justify-center"
+      className="grid h-screen items-center"
     >
       <div>
         <div className="mb-14 flex flex-col gap-4">
@@ -33,9 +33,10 @@ const Hero = () => {
             accessible and highly performant front-facing software applications.
           </HeadingP>
         </div>
+
         <div>
-          <Button size="lg" className="mb-6">
-            Send me a message
+          <Button asChild size="lg" className="mb-6">
+            <a href={`mailto:${email}`}>Send me a message</a>
           </Button>
           <Socials />
         </div>

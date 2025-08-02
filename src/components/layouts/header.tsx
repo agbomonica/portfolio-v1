@@ -5,6 +5,7 @@ import type { Variants } from 'motion/react';
 import { Logo } from '../common';
 import { NavLinks } from '../nav-links';
 import { useScrollDirection } from '@/hooks';
+import { MobileNav } from '../mobile-nav';
 
 // Variants for the header animation
 const headerVariants: Variants = {
@@ -37,7 +38,7 @@ const Header = () => {
 
   return (
     <motion.header
-      className="fixed inset-0 z-10 flex w-full items-center justify-between bg-primary/80 px-32 text-foreground backdrop-blur-md"
+      className="fixed left-0 right-0 top-0 z-20 flex w-full items-center justify-between bg-primary px-10 text-foreground backdrop-blur-md lg:px-16 xl:px-32"
       variants={headerVariants}
       initial="initial"
       animate={currentVariant}
@@ -45,6 +46,7 @@ const Header = () => {
     >
       <Logo />
       <NavLinks />
+      <MobileNav />
     </motion.header>
   );
 };

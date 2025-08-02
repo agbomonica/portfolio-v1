@@ -13,6 +13,7 @@
     --primary: 216, 65%, 11%;
     --primary-1: 218, 31%, 20%;
     --primary-2: 217, 20%, 29%;
+    --primary-3: 217, 64%, 9%;
     --primary-foreground: 0 0% 98%;
 
     --secondary: 43, 100%, 51%;
@@ -44,10 +45,19 @@
     @apply border-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2;
   }
   html {
-    @apply scrollbar-thin;
+    scrollbar-width: thin;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
   }
   body {
-    @apply text-foreground-1 min-h-screen bg-primary;
+    @apply min-h-screen bg-primary text-foreground-1;
   }
 }
 

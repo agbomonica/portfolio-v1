@@ -8,6 +8,9 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: '480px',
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
@@ -23,6 +26,7 @@ export default {
           DEFAULT: 'hsl(var(--primary))',
           1: 'hsl(var(--primary-1))',
           2: 'hsl(var(--primary-2))',
+          3: 'hsl(var(--primary-3))',
           foreground: 'hsl(var(--primary-foreground))',
         },
         secondary: {

@@ -1,13 +1,11 @@
 'use client';
-import { useEffect, useState } from 'react';
 import type { MouseEvent } from 'react';
 import Link from 'next/link';
 import { motion } from 'motion/react';
 import type { Variants } from 'motion/react';
-import { clsx } from 'clsx';
 
 import { Button } from './common';
-import { navLinks } from '@/utils';
+import { navLinks, resumeLink } from '@/utils';
 
 const liVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -22,8 +20,6 @@ const liVariants: Variants = {
 };
 
 const NavLinks = () => {
-  const [activeSection, setActiveSection] = useState<string | null>(null);
-
   const handleSmoothScroll = (
     e: MouseEvent<HTMLAnchorElement>,
     href: string
@@ -36,34 +32,8 @@ const NavLinks = () => {
     }
   };
 
-  const handleActiveSection = (entries: IntersectionObserverEntry[]) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        setActiveSection(entry.target.id);
-      }
-    });
-  };
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(handleActiveSection, {
-      root: null,
-      rootMargin: '-50px 0px -50px 0px',
-      threshold: 0.2,
-    });
-
-    // Observe all sections
-    const sections = navLinks.map((link) =>
-      document.getElementById(link.href.replace('#', ''))
-    );
-    sections.forEach((section) => section && observer.observe(section));
-
-    return () => {
-      sections.forEach((section) => section && observer.unobserve(section));
-    };
-  }, []);
-
   return (
-    <nav>
+    <nav className="hidden md:block">
       <ul className="flex items-center gap-6">
         {navLinks.map((link, i) => (
           <motion.li
@@ -75,13 +45,7 @@ const NavLinks = () => {
           >
             <Link
               href={link.href}
-              className={clsx(
-                'text-sm hover:text-secondary active:text-secondary',
-                {
-                  'text-secondary':
-                    activeSection === link.href.replace('#', ''),
-                }
-              )}
+              className="text-sm hover:text-secondary active:text-secondary"
               onClick={(e) => handleSmoothScroll(e, link.href)}
             >
               {link.name}
@@ -94,7 +58,11 @@ const NavLinks = () => {
           animate="visible"
           custom={navLinks.length}
         >
-          <Button>Resume</Button>
+          <Button asChild>
+            <a href={resumeLink} target="_blank" rel="noopener noreferrer">
+              Resume
+            </a>
+          </Button>
         </motion.li>
       </ul>
     </nav>

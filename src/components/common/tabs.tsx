@@ -54,9 +54,9 @@ const Tabs = ({
       <div
         {...props}
         className={cn(
-          'flex overflow-hidden',
+          'flex',
           {
-            'flex-row': orientation === 'vertical',
+            'flex-col gap-4 md:flex-row': orientation === 'vertical',
             'flex-col': orientation === 'horizontal',
           },
           className
@@ -83,7 +83,8 @@ const TabsList = ({
       className={cn(
         'flex',
         {
-          'flex-col items-start': orientation === 'vertical',
+          'flex-row overflow-x-auto md:basis-52 md:flex-col md:items-start md:overflow-hidden':
+            orientation === 'vertical',
           'flex-row': orientation === 'horizontal',
         },
         className
@@ -111,9 +112,9 @@ const TabsTrigger = ({
       aria-selected={activeTab === value}
       aria-controls={`tab-content-${value}`}
       className={cn(
-        'border-l-primary-2 hover:bg-primary-1 relative whitespace-nowrap border-l-2 px-4 py-3 text-sm font-medium transition-all hover:text-secondary',
+        'relative whitespace-nowrap border-b-2 border-b-primary-2 px-4 py-3 text-sm font-medium transition-all hover:bg-primary-1 hover:text-secondary md:border-b-0 md:border-l-2 md:border-l-primary-2',
         {
-          'text-secondary after:absolute after:left-0 after:top-0 after:h-full after:w-0.5 after:translate-x-[-2px] after:rounded after:bg-secondary':
+          'text-secondary after:absolute after:bottom-0 after:right-0 after:inline-block after:h-0.5 after:w-full after:translate-y-[2px] after:rounded after:bg-secondary md:after:left-0 md:after:top-0 md:after:h-full md:after:w-0.5 md:after:translate-x-[-2px]':
             activeTab === value,
         },
         className
@@ -133,7 +134,7 @@ const TabsContent = ({ value, children, ...props }: TabsContentProps) => {
     <div
       role="tabpanel"
       id={`tab-content-${value}`}
-      className="px-4 py-2"
+      className="flex-1 px-4 py-2"
       {...props}
     >
       {children}
