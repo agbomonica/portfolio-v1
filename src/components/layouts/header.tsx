@@ -27,12 +27,12 @@ const headerVariants: Variants = {
 
 const Header = () => {
   // Controls header visibility
-  const { dir, isWithinThreshold } = useScrollDirection();
+  const { direction, isWithinThreshold } = useScrollDirection();
   const currentVariant = isWithinThreshold
     ? 'initial'
-    : dir === 'up' && !isWithinThreshold
+    : direction === 'up' && !isWithinThreshold
       ? 'scrolledUp'
-      : dir === 'down' && !isWithinThreshold
+      : direction === 'down' && !isWithinThreshold
         ? 'scrolledDown'
         : '';
 
