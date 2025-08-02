@@ -55,7 +55,7 @@ const useScrollDirection = ({
   }, [updateScroll]);
 
   useEffect(() => {
-    // Initialize scroll position
+    /** Initialize scroll position **/
     lastScrollYRef.current = window.pageYOffset;
 
     if (disabled) {
