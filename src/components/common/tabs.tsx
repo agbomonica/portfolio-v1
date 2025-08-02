@@ -1,6 +1,12 @@
 'use client';
 
-import { createContext, useContext, useState } from 'react';
+import {
+  createContext,
+  useContext,
+  useState,
+  useMemo,
+  useCallback,
+} from 'react';
 import type { ButtonHTMLAttributes, HTMLAttributes } from 'react';
 
 import { cn } from '@/lib/utils';
@@ -33,21 +39,28 @@ const Tabs = ({
   orientation = 'vertical',
   ...props
 }: TabsProps) => {
-  const [activeTab, setActiveTab] = useState(value ?? defaultValue);
+  const [internalValue, setInternalValue] = useState(defaultValue);
+  const isControlled = value !== undefined;
+  const activeTab = isControlled ? value : internalValue;
 
-  const handleTabChange = (tab: string) => {
-    if (onValueChange) {
-      onValueChange(tab);
-    } else {
-      setActiveTab(tab);
-    }
-  };
+  const handleTabChange = useCallback(
+    (tab: string) => {
+      if (!isControlled) {
+        setInternalValue(tab);
+      }
+      onValueChange?.(tab);
+    },
+    [isControlled, onValueChange]
+  );
 
-  const contextValue = {
-    orientation,
-    activeTab: value ?? activeTab,
-    setActiveTab: handleTabChange,
-  };
+  const contextValue = useMemo(
+    () => ({
+      orientation,
+      activeTab,
+      setActiveTab: handleTabChange,
+    }),
+    [orientation, activeTab, handleTabChange]
+  );
 
   return (
     <TabsContext value={contextValue}>

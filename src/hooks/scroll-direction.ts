@@ -1,58 +1,79 @@
 'use client';
-import { useState, useEffect } from 'react';
-
-import { SCROLL_DOWN, SCROLL_UP } from '@/utils';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 type ScrollDirection = 'up' | 'down';
 
 interface ScrollDirectionOptions {
   threshold?: number;
   initialDirection?: ScrollDirection;
-  off?: boolean;
+  disabled?: boolean;
 }
 
 const useScrollDirection = ({
-  initialDirection = SCROLL_UP,
+  initialDirection = 'up',
   threshold = 50,
-  off = false,
+  disabled = false,
 }: ScrollDirectionOptions = {}) => {
   const [scrollDirection, setScrollDirection] =
     useState<ScrollDirection>(initialDirection);
   const [isWithinThreshold, setIsWithinThreshold] = useState(true);
 
+  const lastScrollYRef = useRef(0);
+  const tickingRef = useRef(false);
+  const thresholdRef = useRef(threshold);
+  const disabledRef = useRef(disabled);
+
+  // Update refs when props change
   useEffect(() => {
-    let lastScrollY = window.pageYOffset;
-    let ticking = false;
+    thresholdRef.current = threshold;
+    disabledRef.current = disabled;
+  }, [threshold, disabled]);
 
-    const updateScroll = () => {
-      const currentScrollY = window.pageYOffset;
+  const updateScroll = useCallback(() => {
+    const currentScrollY = window.pageYOffset;
+    const lastScrollY = lastScrollYRef.current;
+    const currentThreshold = thresholdRef.current;
 
-      if (Math.abs(currentScrollY - lastScrollY) >= threshold) {
-        setScrollDirection(
-          currentScrollY > lastScrollY ? SCROLL_DOWN : SCROLL_UP
-        );
-        lastScrollY = currentScrollY > 0 ? currentScrollY : 0;
-      }
+    if (Math.abs(currentScrollY - lastScrollY) >= currentThreshold) {
+      const newDirection: ScrollDirection =
+        currentScrollY > lastScrollY ? 'down' : 'up';
+      setScrollDirection(newDirection);
+      lastScrollYRef.current = Math.max(currentScrollY, 0);
+    }
 
-      setIsWithinThreshold(currentScrollY < threshold);
-      ticking = false;
+    setIsWithinThreshold(currentScrollY < currentThreshold);
+    tickingRef.current = false;
+  }, []);
+
+  const handleScroll = useCallback(() => {
+    if (disabledRef.current) return;
+
+    if (!tickingRef.current) {
+      window.requestAnimationFrame(updateScroll);
+      tickingRef.current = true;
+    }
+  }, [updateScroll]);
+
+  useEffect(() => {
+    /** Initialize scroll position **/
+    lastScrollYRef.current = window.pageYOffset;
+
+    if (disabled) {
+      setScrollDirection(initialDirection);
+      return;
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
     };
+  }, [handleScroll, disabled, initialDirection]);
 
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(updateScroll);
-        ticking = true;
-      }
-    };
-
-    off
-      ? setScrollDirection(initialDirection)
-      : window.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [initialDirection, threshold, off]);
-
-  return { dir: scrollDirection, isWithinThreshold };
+  return {
+    direction: scrollDirection,
+    isWithinThreshold,
+  };
 };
 
 export { useScrollDirection };

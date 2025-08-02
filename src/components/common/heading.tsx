@@ -1,9 +1,11 @@
 import { HTMLAttributes } from 'react';
 import { cn } from '@/lib/utils';
 
-interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {}
-
-const HeadingH1 = ({ children, className, ...props }: HeadingProps) => {
+const HeadingH1 = ({
+  children,
+  className,
+  ...props
+}: HTMLAttributes<HTMLHeadingElement>) => {
   return (
     <h1
       className={cn(
@@ -17,7 +19,11 @@ const HeadingH1 = ({ children, className, ...props }: HeadingProps) => {
   );
 };
 
-const HeadingH2 = ({ children, className, ...props }: HeadingProps) => {
+const HeadingH2 = ({
+  children,
+  className,
+  ...props
+}: HTMLAttributes<HTMLHeadingElement>) => {
   return (
     <h2
       className={cn(
@@ -31,7 +37,11 @@ const HeadingH2 = ({ children, className, ...props }: HeadingProps) => {
   );
 };
 
-const HeadingH3 = ({ children, className, ...props }: HeadingProps) => {
+const HeadingH3 = ({
+  children,
+  className,
+  ...props
+}: HTMLAttributes<HTMLHeadingElement>) => {
   return (
     <h3
       className={cn(
@@ -45,7 +55,11 @@ const HeadingH3 = ({ children, className, ...props }: HeadingProps) => {
   );
 };
 
-const HeadingH4 = ({ children, className, ...props }: HeadingProps) => {
+const HeadingH4 = ({
+  children,
+  className,
+  ...props
+}: HTMLAttributes<HTMLHeadingElement>) => {
   return (
     <h4
       className={cn(
