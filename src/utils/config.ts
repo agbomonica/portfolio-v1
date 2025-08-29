@@ -7,6 +7,7 @@ import {
   BiLogoTailwindCss,
   BiLogoSass,
   BiLogoGit,
+  BiLogoAws,
 } from 'react-icons/bi';
 import {
   SiRedux,
@@ -20,7 +21,7 @@ import { IoLogoJavascript } from 'react-icons/io';
 
 const email = 'agbomonica.am@gmail.com';
 const resumeLink =
-  'https://docs.google.com/document/d/1mSS3sHZ-4jaWLjYZd3DwHO7fGyEK0YSN/edit?usp=sharing&ouid=117671838971220007081&rtpof=true&sd=true';
+  'https://drive.google.com/file/d/1Z7kucLr3wFKLVAJkCpyxrN-6-QFEBT0f/view?usp=sharing';
 
 const navLinks = [
   { name: 'About', href: '#about' },
@@ -63,6 +64,7 @@ const technologies = [
   { name: 'Docker', icon: DiDocker },
   { name: 'Redux', icon: SiRedux },
   { name: 'Next.js', icon: SiNextdotjs },
+  { name: 'AWS', icon: BiLogoAws },
   { name: 'Git', icon: BiLogoGit },
   { name: 'Webpack', icon: SiWebpack },
   { name: 'Testing', icon: SiTestinglibrary },
